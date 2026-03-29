@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPM — Legend Reference</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-text: #172b4d;
+    --color-text-subtle: #44546f;
+    --color-text-subtlest: #626f86;
+    --color-brand-bold: #0c66e4;
+    --color-brand-subtlest: #e9f2ff;
+    --surface: #ffffff;
+    --surface-sunken: #f7f8f9;
+    --color-border: rgba(9,30,66,0.14);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --c-blue: #0c66e4; --c-teal: #2898bd; --c-green: #6a9a23;
+    --c-orange: #e97f33; --c-purple: #af59e1; --c-red: #e2483d;
+    --c-yellow: #b38600; --c-magenta: #943d73; --c-lime: #4c6b1f; --c-gray: #758195;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--surface-sunken);color:var(--color-text);padding:0;line-height:1.6}
+
+  /* ===== TABS ===== */
+  .tabs-bar{display:flex;gap:0;background:var(--surface);border-bottom:2px solid var(--color-border);position:sticky;top:0;z-index:10}
+  .tab-btn{padding:14px 28px;font-size:14px;font-weight:600;color:var(--color-text-subtlest);cursor:pointer;border:none;background:none;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;font-family:inherit}
+  .tab-btn:hover{color:var(--color-text-subtle);background:var(--surface-sunken)}
+  .tab-btn.active{color:var(--color-brand-bold);border-bottom-color:var(--color-brand-bold)}
+  .tab-panel{display:none;padding:32px}
+  .tab-panel.active{display:block}
+
+  /* ===== SHARED ===== */
+  .page-header{text-align:center;margin-bottom:32px}
+  .page-header h1{font-size:24px;font-weight:700;margin-bottom:4px}
+  .page-header p{font-size:13px;color:var(--color-text-subtlest);max-width:600px;margin:0 auto}
+  .section-title{font-size:16px;font-weight:700;margin:28px 0 14px;display:flex;align-items:center;gap:10px}
+  .section-title .badge{font-size:10px;font-weight:600;padding:3px 10px;background:var(--color-brand-bold);color:#fff;border-radius:999px;letter-spacing:.3px}
+
+  /* ===== TAB 1 STYLES ===== */
+  .widget-section{background:var(--surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);margin-bottom:16px;overflow:hidden}
+  .widget-header{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--color-border);background:var(--surface-sunken)}
+  .wn{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--color-brand-bold);color:#fff;font-size:12px;font-weight:700;flex-shrink:0}
+  .widget-header h2{font-size:16px;font-weight:600}
+  .variant-row{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--color-border);min-height:52px}
+  .variant-row:last-child{border-bottom:none}
+  .variant-name{display:flex;align-items:center;padding:12px 20px;font-size:13px;font-weight:500;color:var(--color-text-subtle);background:var(--surface-sunken);border-right:1px solid var(--color-border)}
+  .variant-legend{display:flex;align-items:center;padding:12px 20px;gap:14px;flex-wrap:wrap}
+  .variant-row.single{grid-template-columns:1fr}
+  .leg-item{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--color-text-subtle);white-space:nowrap}
+  .sw-roundrect{width:16px;height:10px;border-radius:3px;flex-shrink:0}
+  .sw-circle{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .sw-line{width:22px;height:3px;border-radius:2px;flex-shrink:0}
+  .tm-bar{width:20px;height:8px;border-radius:4px;flex-shrink:0}
+  .tm-diamond{width:8px;height:8px;transform:rotate(45deg);border-radius:1px;flex-shrink:0}
+  .rag-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .flow-band{width:20px;height:8px;border-radius:4px;opacity:.7;flex-shrink:0}
+  .radar-swatch{width:16px;height:10px;border-radius:3px;opacity:.3;border:2px solid;flex-shrink:0}
+  .accent-bar{width:4px;height:18px;border-radius:2px;flex-shrink:0}
+  .gradient-bar{height:10px;border-radius:5px;flex-shrink:0}
+  .gradient-labels{display:flex;justify-content:space-between;font-size:9px;color:var(--color-text-subtlest)}
+  .gradient-group{display:flex;flex-direction:column;gap:2px}
+  .size-group{display:flex;align-items:flex-end;gap:8px}
+  .size-item{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .size-bubble{border-radius:50%;border:1.5px solid var(--c-blue);background:rgba(12,102,228,.12)}
+  .size-label{font-size:9px;color:var(--color-text-subtlest)}
+  .leg-sep{width:1px;height:20px;background:var(--color-border);margin:0 2px}
+  .no-legend{font-size:12px;color:var(--color-text-subtlest);font-style:italic}
+  .shape-tag{font-size:10px;font-weight:500;color:var(--color-text-subtlest);background:var(--surface-sunken);padding:2px 8px;border-radius:4px;border:1px solid var(--color-border);margin-left:4px}
+
+  /* ===== TAB 2 STYLES ===== */
+  .demo-card{background:var(--surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);margin-bottom:20px;overflow:hidden}
+  .demo-header{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--color-border);background:var(--surface-sunken)}
+  .demo-header h3{font-size:14px;font-weight:600}
+  .pos-tag{margin-left:auto;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--color-brand-subtlest);color:var(--color-brand-bold)}
+  .demo-body{padding:24px}
+  .sw{width:12px;height:8px;border-radius:3px;flex-shrink:0}
+  .arrow-btn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--color-border);background:var(--surface);cursor:pointer;flex-shrink:0;color:var(--color-text-subtle);font-size:12px;font-weight:700;transition:all .15s;user-select:none}
+  .arrow-btn:hover{background:var(--surface-sunken);border-color:var(--color-text-subtlest)}
+  .arrow-btn.disabled{opacity:.3;pointer-events:none}
+  .page-indicator{font-size:10px;color:var(--color-text-subtlest);font-weight:500;white-space:nowrap}
+  .h-legend-container{display:flex;align-items:center;gap:8px;width:100%}
+  .h-legend-track{display:flex;align-items:center;gap:12px;overflow:hidden;flex:1;min-width:0}
+  .h-legend-track.clipped .leg-item:nth-child(n+8){display:none}
+  .v-legend-container{display:flex;flex-direction:column;gap:6px;max-width:180px}
+  .v-legend-track{display:flex;flex-direction:column;gap:6px;overflow:hidden}
+  .v-legend-track.clipped .leg-item:nth-child(n+6){display:none}
+  .demo-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .layout-label{font-size:10px;font-weight:600;color:var(--color-text-subtlest);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+  .widget-frame{border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--surface-sunken);position:relative;overflow:hidden}
+  .widget-chart-area{height:140px;display:flex;align-items:center;justify-content:center;color:var(--color-text-subtlest);font-size:12px;font-style:italic}
+  .widget-legend-slot{padding:10px 16px;border-top:1px solid var(--color-border);background:var(--surface)}
+  .widget-legend-slot.top{border-top:none;border-bottom:1px solid var(--color-border)}
+  .callout{display:flex;gap:8px;align-items:flex-start;padding:12px 16px;background:#fff7d6;border:1px solid #b38600;border-radius:var(--radius-md);font-size:12px;color:#7f5f01;margin-top:16px}
+  .callout .icon{font-size:16px;flex-shrink:0}
+
+  @media(max-width:800px){
+    .tab-panel{padding:16px}
+    .variant-row{grid-template-columns:1fr}
+    .variant-name{border-right:none;border-bottom:1px solid var(--color-border)}
+    .demo-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== TAB BAR ===== -->
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="switchTab('defaults')">Default Legends</button>
+  <button class="tab-btn" onclick="switchTab('overflow')">Overflow & Navigation</button>
+</div>
+
+<!-- ============================================================== -->
+<!-- TAB 1 — DEFAULT LEGENDS -->
+<!-- ============================================================== -->
+<div id="tab-defaults" class="tab-panel active">
+
+<div class="page-header">
+  <h1>Default Legend per Widget Variant</h1>
+  <p>The standard default legend representation for every widget variant. Identical variants share one row.</p>
+</div>
+
+<!-- 1. METRIC / ATTRIBUTE -->
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">1</div><h2>Metric / Attribute</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a. Value</div>
+    <div class="variant-legend"><span class="no-legend">No legend — single metric display</span></div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">b. Progress Bar (Circular)</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Actual</span>
+      <span class="leg-item"><div class="sw-circle" style="background:#e0e3e8"></div> Remaining</span>
+      <span class="shape-tag">circle</span>
+    </div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">c. Gauge</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-red)"></div> Low</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-yellow)"></div> Medium</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> High</span>
+      <span class="shape-tag">roundRect</span>
+    </div>
+  </div>
+</div>
+
+<!-- 2. DONUT -->
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">2</div><h2>Donut</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a. Donut</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Category A</span>
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Category B</span>
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-green)"></div> Category C</span>
+      <span class="shape-tag">circle</span>
+    </div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">b. Pie</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Category A</span>
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Category B</span>
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-green)"></div> Category C</span>
+      <span class="shape-tag">circle</span>
+    </div>
+  </div>
+</div>
+
+<!-- 3. BAR -->
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">3</div><h2>Bar</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a–f. All Bar variants</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Series A</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Series B</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Series C</span>
+      <span class="shape-tag">roundRect</span>
+    </div>
+  </div>
+</div>
+
+<!-- 4. LINE & AREA -->
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">4</div><h2>Line</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a. Line &amp; b. Area<br><span style="font-size:11px;font-weight:400;color:var(--color-text-subtlest)">without markers</span></div>
+    <div class="variant-legend">
+      <span class="leg-item"><svg width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="var(--c-blue)" stroke-width="2" stroke-linecap="round"/></svg> Series A</span>
+      <span class="leg-item"><svg width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="var(--c-teal)" stroke-width="2" stroke-linecap="round"/></svg> Series B</span>
+      <span class="shape-tag">line</span>
+    </div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">a. Line &amp; b. Area<br><span style="font-size:11px;font-weight:400;color:var(--color-text-subtlest)">with markers</span></div>
+    <div class="variant-legend">
+      <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-blue)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-blue)"/></svg> Series A</span>
+      <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-teal)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-teal)"/></svg> Series B</span>
+      <span class="shape-tag">line + marker</span>
+    </div>
+  </div>
+</div>
+
+<!-- 5. COMBO -->
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">5</div><h2>Combo</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a. Combo</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Bar Series</span>
+      <span class="leg-sep"></span>
+      <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-orange)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-orange)"/></svg> Line Series</span>
+      <span class="shape-tag">roundRect + line</span>
+    </div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">b. Stacked Combo</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Stack A</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Stack B</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Stack C</span>
+      <span class="leg-sep"></span>
+      <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-orange)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-orange)"/></svg> Line Series</span>
+      <span class="shape-tag">roundRect + line</span>
+    </div>
+  </div>
+</div>
+
+<!-- 6. TABLE -->
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">6</div><h2>Table</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a. Basic table</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Category A</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Category B</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Category C</span>
+      <span class="shape-tag">roundRect</span>
+    </div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">b. Pivot table</div>
+    <div class="variant-legend"><span class="no-legend">No legend — row/column headers serve as labels</span></div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">c. Summary table</div>
+    <div class="variant-legend"><span class="no-legend">No legend — aggregated rows are self-labeled</span></div>
+  </div>
+</div>
+
+<!-- 7. TIMELINE -->
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">7</div><h2>Timeline</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a. Horizontal timeline</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Phase A</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Phase B</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Phase C</span>
+      <span class="leg-sep"></span>
+      <span class="leg-item"><div class="tm-diamond" style="background:var(--c-purple)"></div> Milestone</span>
+      <span class="shape-tag">roundRect + diamond</span>
+    </div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">b. Vertical timeline</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Phase A</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Phase B</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Phase C</span>
+      <span class="leg-sep"></span>
+      <span class="leg-item"><div class="tm-diamond" style="background:var(--c-purple)"></div> Milestone</span>
+      <span class="shape-tag">roundRect + diamond</span>
+    </div>
+  </div>
+</div>
+
+<!-- 8–18: remaining widgets -->
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">8</div><h2>Hierarchical Structure</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Category A</span>
+    <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Category B</span>
+    <span class="leg-item"><div class="sw-circle" style="background:var(--c-green)"></div> Category C</span>
+    <span class="shape-tag">circle</span>
+  </div></div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">9</div><h2>Network</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Node Type A</span>
+    <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Node Type B</span>
+    <span class="leg-item"><div class="sw-circle" style="background:var(--c-green)"></div> Node Type C</span>
+    <span class="shape-tag">circle</span>
+  </div></div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">10</div><h2>Map</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a. Filled map</div>
+    <div class="variant-legend">
+      <div class="gradient-group"><div class="gradient-bar" style="background:linear-gradient(90deg,#e9f2ff,#0c66e4);width:140px"></div><div class="gradient-labels" style="width:140px"><span>0</span><span>500</span><span>1,000</span></div></div>
+      <span class="shape-tag">gradient</span>
+    </div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">b. Bubble map</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Category A</span>
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Category B</span>
+      <span class="leg-sep"></span>
+      <div class="size-group">
+        <div class="size-item"><div class="size-bubble" style="width:10px;height:10px"></div><span class="size-label">10</span></div>
+        <div class="size-item"><div class="size-bubble" style="width:18px;height:18px"></div><span class="size-label">50</span></div>
+        <div class="size-item"><div class="size-bubble" style="width:28px;height:28px"></div><span class="size-label">100</span></div>
+      </div>
+      <span class="shape-tag">circle + size</span>
+    </div>
+  </div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">11</div><h2>Scatter</h2></div>
+  <div class="variant-row">
+    <div class="variant-name">a. Scatter</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Group A</span>
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Group B</span>
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-green)"></div> Group C</span>
+      <span class="shape-tag">circle</span>
+    </div>
+  </div>
+  <div class="variant-row">
+    <div class="variant-name">b. Bubble</div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Group A</span>
+      <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Group B</span>
+      <span class="leg-sep"></span>
+      <div class="size-group">
+        <div class="size-item"><div class="size-bubble" style="width:10px;height:10px"></div><span class="size-label">10</span></div>
+        <div class="size-item"><div class="size-bubble" style="width:18px;height:18px"></div><span class="size-label">50</span></div>
+        <div class="size-item"><div class="size-bubble" style="width:28px;height:28px"></div><span class="size-label">100</span></div>
+      </div>
+      <span class="shape-tag">circle + size</span>
+    </div>
+  </div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">12</div><h2>Sankey</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <span class="leg-item"><div class="flow-band" style="background:var(--c-blue)"></div> Flow A</span>
+    <span class="leg-item"><div class="flow-band" style="background:var(--c-teal)"></div> Flow B</span>
+    <span class="leg-item"><div class="flow-band" style="background:var(--c-green)"></div> Flow C</span>
+    <span class="shape-tag">rounded band</span>
+  </div></div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">13</div><h2>Treemap</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Category A</span>
+    <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Category B</span>
+    <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Category C</span>
+    <span class="shape-tag">roundRect</span>
+  </div></div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">14</div><h2>Heatmap</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <div class="gradient-group"><div class="gradient-bar" style="background:linear-gradient(90deg,#e9f2ff,#85b8ff,#388bff,#0c66e4,#003590);width:160px"></div><div class="gradient-labels" style="width:160px"><span>0</span><span>50</span><span>100</span></div></div>
+    <span class="shape-tag">gradient</span>
+  </div></div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">15</div><h2>RAG Matrix</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <span class="leg-item"><div class="rag-dot" style="background:#e2483d"></div> Red</span>
+    <span class="leg-item"><div class="rag-dot" style="background:#e97f33"></div> Amber</span>
+    <span class="leg-item"><div class="rag-dot" style="background:#6a9a23"></div> Green</span>
+    <span class="shape-tag">circle</span>
+  </div></div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">16</div><h2>Radar</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <span class="leg-item"><div class="radar-swatch" style="background:var(--c-blue);border-color:var(--c-blue)"></div> Series A</span>
+    <span class="leg-item"><div class="radar-swatch" style="background:var(--c-teal);border-color:var(--c-teal)"></div> Series B</span>
+    <span class="leg-item"><div class="radar-swatch" style="background:var(--c-green);border-color:var(--c-green)"></div> Series C</span>
+    <span class="shape-tag">fill + stroke</span>
+  </div></div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">17</div><h2>Card</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <span class="leg-item"><div class="accent-bar" style="background:var(--c-blue)"></div> Category A</span>
+    <span class="leg-item"><div class="accent-bar" style="background:var(--c-teal)"></div> Category B</span>
+    <span class="leg-item"><div class="accent-bar" style="background:var(--c-green)"></div> Category C</span>
+    <span class="shape-tag">vertical line</span>
+  </div></div>
+</div>
+
+<div class="widget-section">
+  <div class="widget-header"><div class="wn">18</div><h2>List</h2></div>
+  <div class="variant-row single"><div class="variant-legend">
+    <span class="leg-item"><div class="accent-bar" style="background:var(--c-blue)"></div> Category A</span>
+    <span class="leg-item"><div class="accent-bar" style="background:var(--c-teal)"></div> Category B</span>
+    <span class="leg-item"><div class="accent-bar" style="background:var(--c-green)"></div> Category C</span>
+    <span class="shape-tag">vertical line</span>
+  </div></div>
+</div>
+
+</div><!-- /tab-defaults -->
+<!-- ============================================================== -->
+<!-- TAB 2 — OVERFLOW & NAVIGATION -->
+<!-- ============================================================== -->
+<div id="tab-overflow" class="tab-panel">
+
+<div class="page-header">
+  <h1>Legend Overflow & Scrollable Navigation</h1>
+  <p>How legends behave when there are too many items to fit. Click the arrows to paginate through legend items.</p>
+</div>
+
+<div class="section-title"><span class="badge">A</span> Horizontal Legend — Bottom Side</div>
+
+<div class="demo-grid">
+  <div class="demo-card">
+    <div class="demo-header"><h3>Bottom Side</h3><span class="pos-tag">Indicator bottom center</span></div>
+    <div class="demo-body"><div class="widget-frame">
+      <div class="widget-chart-area">Chart area</div>
+      <div class="widget-legend-slot"><div class="scrollable-legend" data-per-page="6" data-orient="h" data-align="center" data-indicator="below"></div></div>
+    </div></div>
+  </div>
+  <div class="demo-card">
+    <div class="demo-header"><h3>Bottom Side</h3><span class="pos-tag">Indicator top center</span></div>
+    <div class="demo-body"><div class="widget-frame">
+      <div class="widget-chart-area">Chart area</div>
+      <div class="widget-legend-slot"><div class="scrollable-legend" data-per-page="6" data-orient="h" data-align="center" data-indicator="above"></div></div>
+    </div></div>
+  </div>
+  <div class="demo-card">
+    <div class="demo-header"><h3>Bottom Side</h3><span class="pos-tag">Indicator right</span></div>
+    <div class="demo-body"><div class="widget-frame">
+      <div class="widget-chart-area">Chart area</div>
+      <div class="widget-legend-slot"><div class="scrollable-legend" data-per-page="6" data-orient="h" data-align="center" data-indicator="right"></div></div>
+    </div></div>
+  </div>
+  <div class="demo-card">
+    <div class="demo-header"><h3>Bottom Side</h3><span class="pos-tag">Indicator left</span></div>
+    <div class="demo-body"><div class="widget-frame">
+      <div class="widget-chart-area">Chart area</div>
+      <div class="widget-legend-slot"><div class="scrollable-legend" data-per-page="6" data-orient="h" data-align="center" data-indicator="left"></div></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="section-title"><span class="badge">B</span> Horizontal Legend — Top Side</div>
+
+<div class="demo-grid">
+  <div class="demo-card">
+    <div class="demo-header"><h3>Top Side</h3><span class="pos-tag">Indicator bottom center</span></div>
+    <div class="demo-body"><div class="widget-frame">
+      <div class="widget-legend-slot top"><div class="scrollable-legend" data-per-page="6" data-orient="h" data-align="center" data-indicator="below"></div></div>
+      <div class="widget-chart-area">Chart area</div>
+    </div></div>
+  </div>
+  <div class="demo-card">
+    <div class="demo-header"><h3>Top Side</h3><span class="pos-tag">Indicator top center</span></div>
+    <div class="demo-body"><div class="widget-frame">
+      <div class="widget-legend-slot top"><div class="scrollable-legend" data-per-page="6" data-orient="h" data-align="center" data-indicator="above"></div></div>
+      <div class="widget-chart-area">Chart area</div>
+    </div></div>
+  </div>
+  <div class="demo-card">
+    <div class="demo-header"><h3>Top Side</h3><span class="pos-tag">Indicator right</span></div>
+    <div class="demo-body"><div class="widget-frame">
+      <div class="widget-legend-slot top"><div class="scrollable-legend" data-per-page="6" data-orient="h" data-align="center" data-indicator="right"></div></div>
+      <div class="widget-chart-area">Chart area</div>
+    </div></div>
+  </div>
+  <div class="demo-card">
+    <div class="demo-header"><h3>Top Side</h3><span class="pos-tag">Indicator left</span></div>
+    <div class="demo-body"><div class="widget-frame">
+      <div class="widget-legend-slot top"><div class="scrollable-legend" data-per-page="6" data-orient="h" data-align="center" data-indicator="left"></div></div>
+      <div class="widget-chart-area">Chart area</div>
+    </div></div>
+  </div>
+</div>
+
+<div class="section-title"><span class="badge">C</span> Vertical Legend — Overflow with Arrows</div>
+
+<div class="demo-grid">
+  <div class="demo-card">
+    <div class="demo-header"><h3>Right Side</h3><span class="pos-tag">Vertical list</span></div>
+    <div class="demo-body"><div class="widget-frame" style="display:flex;min-height:220px">
+      <div class="widget-chart-area" style="flex:1">Chart area</div>
+      <div style="border-left:1px solid var(--color-border);padding:12px 14px;background:var(--surface)">
+        <div class="scrollable-legend" data-per-page="5" data-orient="v" data-align="left" data-indicator="below"></div>
+      </div>
+    </div></div>
+  </div>
+  <div class="demo-card">
+    <div class="demo-header"><h3>Left Side</h3><span class="pos-tag">Vertical list</span></div>
+    <div class="demo-body"><div class="widget-frame" style="display:flex;min-height:220px">
+      <div style="border-right:1px solid var(--color-border);padding:12px 14px;background:var(--surface)">
+        <div class="scrollable-legend" data-per-page="5" data-orient="v" data-align="left" data-indicator="below"></div>
+      </div>
+      <div class="widget-chart-area" style="flex:1">Chart area</div>
+    </div></div>
+  </div>
+</div>
+
+<div class="section-title"><span class="badge">D</span> All Legend Positions (Summary)</div>
+<div class="demo-card"><div class="demo-body">
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden"><div style="background:var(--color-brand-subtlest);padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--color-brand-bold)"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="0" y="0" width="5" height="3" rx="1" fill="var(--color-brand-bold)"/><rect x="0" y="4" width="12" height="8" rx="1" fill="var(--color-border)"/></svg>Top Left</div><div style="padding:8px 10px;font-size:10px;color:var(--color-text-subtlest)">Horizontal • Align left<br>Arrows: ‹ items ›</div></div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden"><div style="background:var(--color-brand-subtlest);padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--color-brand-bold)"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="3" y="0" width="6" height="3" rx="1" fill="var(--color-brand-bold)"/><rect x="0" y="4" width="12" height="8" rx="1" fill="var(--color-border)"/></svg>Top Center</div><div style="padding:8px 10px;font-size:10px;color:var(--color-text-subtlest)">Horizontal • Centered<br>Arrows: ‹ items ›</div></div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden"><div style="background:var(--color-brand-subtlest);padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--color-brand-bold)"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="7" y="0" width="5" height="3" rx="1" fill="var(--color-brand-bold)"/><rect x="0" y="4" width="12" height="8" rx="1" fill="var(--color-border)"/></svg>Top Right</div><div style="padding:8px 10px;font-size:10px;color:var(--color-text-subtlest)">Horizontal • Align right<br>Arrows: ‹ items ›</div></div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden"><div style="background:var(--color-brand-subtlest);padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--color-brand-bold)"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="0" y="0" width="4" height="12" rx="1" fill="var(--color-brand-bold)"/><rect x="5" y="0" width="7" height="12" rx="1" fill="var(--color-border)"/></svg>Left</div><div style="padding:8px 10px;font-size:10px;color:var(--color-text-subtlest)">Vertical • Top aligned<br>Arrows: ▲ items ▼</div></div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden"><div style="background:var(--color-brand-subtlest);padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--color-brand-bold)"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="0" y="0" width="7" height="12" rx="1" fill="var(--color-border)"/><rect x="8" y="0" width="4" height="12" rx="1" fill="var(--color-brand-bold)"/></svg>Right</div><div style="padding:8px 10px;font-size:10px;color:var(--color-text-subtlest)">Vertical • Top aligned<br>Arrows: ▲ items ▼</div></div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden"><div style="background:var(--color-brand-subtlest);padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--color-brand-bold)"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="0" y="0" width="12" height="8" rx="1" fill="var(--color-border)"/><rect x="0" y="9" width="5" height="3" rx="1" fill="var(--color-brand-bold)"/></svg>Bottom Left</div><div style="padding:8px 10px;font-size:10px;color:var(--color-text-subtlest)">Horizontal • Align left<br>Arrows: ‹ items ›</div></div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden"><div style="background:var(--color-brand-subtlest);padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--color-brand-bold)"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="0" y="0" width="12" height="8" rx="1" fill="var(--color-border)"/><rect x="3" y="9" width="6" height="3" rx="1" fill="var(--color-brand-bold)"/></svg>Bottom Center</div><div style="padding:8px 10px;font-size:10px;color:var(--color-text-subtlest)">Horizontal • Centered<br>Arrows: ‹ items ›</div></div>
+    <div style="border:1px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden"><div style="background:var(--color-brand-subtlest);padding:6px 10px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:600;color:var(--color-brand-bold)"><svg width="12" height="12" viewBox="0 0 12 12"><rect x="0" y="0" width="12" height="8" rx="1" fill="var(--color-border)"/><rect x="7" y="9" width="5" height="3" rx="1" fill="var(--color-brand-bold)"/></svg>Bottom Right</div><div style="padding:8px 10px;font-size:10px;color:var(--color-text-subtlest)">Horizontal • Align right<br>Arrows: ‹ items ›</div></div>
+  </div>
+  <div class="callout" style="margin-top:20px"><span class="icon">💡</span><div><strong>Behavior rules:</strong> Horizontal layouts use <strong>‹ ›</strong> arrows. Vertical layouts use <strong>▲ ▼</strong> arrows. Previous arrow starts <strong>disabled</strong> on page 1, next arrow disabled on last page. Items per page calculated dynamically from available space.</div></div>
+</div></div>
+
+</div><!-- /tab-overflow -->
+
+<script>
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab-btn')[id === 'defaults' ? 0 : 1].classList.add('active');
+  window.scrollTo(0, 0);
+  initLegends();
+}
+
+var COLORS = ['#0c66e4','#2898bd','#6a9a23','#e97f33','#af59e1','#e2483d','#b38600','#943d73','#4c6b1f','#758195','#0055cc','#206a83'];
+var NAMES = ['Series 1','Series 2','Series 3','Series 4','Series 5','Series 6','Series 7','Series 8','Series 9','Series 10','Series 11','Series 12'];
+
+function initLegends() {
+  document.querySelectorAll('.scrollable-legend').forEach(function(el) {
+    if (el.dataset.init) return;
+    el.dataset.init = '1';
+    var perPage = parseInt(el.dataset.perPage) || 6;
+    var orient = el.dataset.orient || 'h';
+    var align = el.dataset.align || 'center';
+    var indicatorPos = el.dataset.indicator || 'below';
+    var total = NAMES.length;
+    var totalPages = Math.ceil(total / perPage);
+    var page = 0;
+
+    function render() {
+      var start = page * perPage;
+      var end = Math.min(start + perPage, total);
+      var isFirst = page === 0;
+      var isLast = page === totalPages - 1;
+      var prevChar = orient === 'h' ? '‹' : '▲';
+      var nextChar = orient === 'h' ? '›' : '▼';
+      var prevCls = isFirst ? ' disabled' : '';
+      var nextCls = isLast ? ' disabled' : '';
+      var prevBtn = '<button class="arrow-btn' + prevCls + '" data-dir="prev">' + prevChar + '</button>';
+      var nextBtn = '<button class="arrow-btn' + nextCls + '" data-dir="next">' + nextChar + '</button>';
+      var indicator = '<span class="page-indicator" style="background:var(--surface);padding:2px 10px;border-radius:10px;border:1px solid var(--color-border)">' + (page+1) + ' / ' + totalPages + '</span>';
+      var items = '';
+      for (var i = start; i < end; i++) {
+        items += '<span class="leg-item"><div class="sw" style="background:' + COLORS[i] + '"></div> ' + NAMES[i] + '</span>';
+      }
+      if (orient === 'h') {
+        var justify = align === 'left' ? 'flex-start' : align === 'right' ? 'flex-end' : 'center';
+        var top = '', bottom = '', left = '', right = '';
+        if (indicatorPos === 'below') bottom = '<div style="text-align:center;margin-top:6px">' + indicator + '</div>';
+        else if (indicatorPos === 'above') top = '<div style="text-align:center;margin-bottom:6px">' + indicator + '</div>';
+        else if (indicatorPos === 'left') left = indicator;
+        else if (indicatorPos === 'right') right = indicator;
+        el.innerHTML = top + '<div style="display:flex;align-items:center;gap:8px;width:100%">' + left + prevBtn + '<div style="flex:1;display:flex;align-items:center;gap:12px;justify-content:' + justify + ';overflow:hidden;min-width:0">' + items + '</div>' + nextBtn + right + '</div>' + bottom;
+      } else {
+        el.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;gap:6px;max-width:140px">' + prevBtn + '<div style="display:flex;flex-direction:column;gap:6px">' + items + '</div>' + nextBtn + '<div style="margin-top:2px">' + indicator + '</div></div>';
+      }
+      el.querySelectorAll('.arrow-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          if (btn.classList.contains('disabled')) return;
+          if (btn.dataset.dir === 'prev') page--;
+          else page++;
+          render();
+        });
+      });
+    }
+    render();
+  });
+}
+initLegends();
+</script>
+
+</body>
+</html>
