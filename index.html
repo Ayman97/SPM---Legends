@@ -77,7 +77,7 @@
   .pos-tag{margin-left:auto;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:var(--color-brand-subtlest);color:var(--color-brand-bold)}
   .demo-body{padding:24px}
   .sw{width:12px;height:8px;border-radius:3px;flex-shrink:0}
-  .arrow-btn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--color-border);background:var(--surface);cursor:pointer;flex-shrink:0;color:var(--color-text-subtle);font-size:12px;font-weight:700;transition:all .15s;user-select:none}
+  .arrow-btn{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--color-border);background:var(--surface);cursor:pointer;flex-shrink:0;color:var(--color-text-subtle);line-height:0;transition:all .15s;user-select:none}
   .arrow-btn:hover{background:var(--surface-sunken);border-color:var(--color-text-subtlest)}
   .arrow-btn.disabled{opacity:.3;pointer-events:none}
   .h-legend-container{display:flex;align-items:center;gap:8px;width:100%}
@@ -668,8 +668,12 @@ function initLegends() {
       var end = Math.min(start + perPage, total);
       var isFirst = page === 0;
       var isLast = page === totalPages - 1;
-      var prevChar = orient === 'h' ? '‹' : '▲';
-      var nextChar = orient === 'h' ? '›' : '▼';
+      var prevChar = orient === 'h'
+        ? '<svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="6,1 2,6 6,11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        : '<svg width="12" height="8" viewBox="0 0 12 8" fill="none"><polyline points="1,6 6,2 11,6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      var nextChar = orient === 'h'
+        ? '<svg width="8" height="12" viewBox="0 0 8 12" fill="none"><polyline points="2,1 6,6 2,11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        : '<svg width="12" height="8" viewBox="0 0 12 8" fill="none"><polyline points="1,2 6,6 11,2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
       var prevCls = isFirst ? ' disabled' : '';
       var nextCls = isLast ? ' disabled' : '';
       var prevBtn = '<button class="arrow-btn' + prevCls + '" data-dir="prev">' + prevChar + '</button>';
