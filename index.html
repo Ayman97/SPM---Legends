@@ -130,9 +130,84 @@
   <p>The standard default legend representation for every widget variant. Identical variants share one row.</p>
 </div>
 
-<!-- 1. METRIC / ATTRIBUTE -->
+<!-- SHAPES OVERVIEW -->
+<div class="section-title"><span class="badge">REF</span> Legend Shape Reference</div>
+<div class="shapes-overview">
+  <div class="shapes-overview-header"><div class="wn" style="background:#44546f">S</div><h2>All Shapes — Developer Reference</h2></div>
+  <div class="shapes-grid">
+
+    <div class="shape-cell">
+      <div class="shape-cell-name">circle</div>
+      <div class="shape-cell-example">
+        <span class="leg-item"><div class="sw-circle" style="background:#0c66e4"></div> Label</span>
+      </div>
+      <div class="shape-cell-usage">Circular Progress · Donut · Pie · Network · Scatter · RAG Matrix</div>
+    </div>
+
+    <div class="shape-cell">
+      <div class="shape-cell-name">roundRect</div>
+      <div class="shape-cell-example">
+        <span class="leg-item"><div class="sw-roundrect" style="background:#0c66e4"></div> Label</span>
+      </div>
+      <div class="shape-cell-usage">Gauge · Bar · Combo (bar) · Table · Timeline (phases) · Hierarchical · Treemap · Sankey · Card · List</div>
+    </div>
+
+    <div class="shape-cell">
+      <div class="shape-cell-name">line + marker</div>
+      <div class="shape-cell-example">
+        <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="#0c66e4" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="#0c66e4"/></svg> Label</span>
+      </div>
+      <div class="shape-cell-usage">Line · Area · Combo (line) · Radar</div>
+    </div>
+
+    <div class="shape-cell">
+      <div class="shape-cell-name">roundRect + diamond</div>
+      <div class="shape-cell-example">
+        <span class="leg-item"><div class="sw-roundrect" style="background:#0c66e4"></div> Phase</span>
+        <span class="leg-item"><div class="tm-diamond" style="background:#af59e1"></div> Milestone</span>
+      </div>
+      <div class="shape-cell-usage">Timeline (phases + milestones)</div>
+    </div>
+
+    <div class="shape-cell">
+      <div class="shape-cell-name">roundRect + line + marker</div>
+      <div class="shape-cell-example">
+        <span class="leg-item"><div class="sw-roundrect" style="background:#0c66e4"></div> Bar</span>
+        <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="#e97f33" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="#e97f33"/></svg> Line</span>
+      </div>
+      <div class="shape-cell-usage">Combo chart</div>
+    </div>
+
+    <div class="shape-cell">
+      <div class="shape-cell-name">gradient</div>
+      <div class="shape-cell-example">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="font-size:10px;color:var(--color-text-subtlest)">0</span>
+          <div style="width:80px;height:10px;border-radius:5px;background:linear-gradient(90deg,#e0e3e8,#172b4d)"></div>
+          <span style="font-size:10px;color:var(--color-text-subtlest)">1K</span>
+        </div>
+      </div>
+      <div class="shape-cell-usage">Filled Map · Heatmap</div>
+    </div>
+
+    <div class="shape-cell">
+      <div class="shape-cell-name">size bubbles</div>
+      <div class="shape-cell-example">
+        <div class="size-group">
+          <div class="size-item"><div class="size-bubble" style="width:10px;height:10px"></div><span class="size-label">10</span></div>
+          <div class="size-item"><div class="size-bubble" style="width:18px;height:18px"></div><span class="size-label">50</span></div>
+          <div class="size-item"><div class="size-bubble" style="width:28px;height:28px"></div><span class="size-label">100</span></div>
+        </div>
+      </div>
+      <div class="shape-cell-usage">Bubble · Bubble Map</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 1. METRIC / VALUE CARD -->
 <div class="widget-section">
-  <div class="widget-header"><div class="wn">1</div><h2>Metric / Attribute</h2></div>
+  <div class="widget-header"><div class="wn">1</div><h2>Metric / Value Card</h2></div>
   <div class="variant-row">
     <div class="variant-name">a. Value</div>
     <div class="variant-legend"><span class="no-legend">No legend — single metric display</span></div>
@@ -197,15 +272,7 @@
 <div class="widget-section">
   <div class="widget-header"><div class="wn">4</div><h2>Line</h2></div>
   <div class="variant-row">
-    <div class="variant-name">a. Line &amp; b. Area<br><span style="font-size:11px;font-weight:400;color:var(--color-text-subtlest)">without markers</span></div>
-    <div class="variant-legend">
-      <span class="leg-item"><svg width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="var(--c-blue)" stroke-width="2" stroke-linecap="round"/></svg> Series A</span>
-      <span class="leg-item"><svg width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="var(--c-teal)" stroke-width="2" stroke-linecap="round"/></svg> Series B</span>
-      <span class="shape-tag">line</span>
-    </div>
-  </div>
-  <div class="variant-row">
-    <div class="variant-name">a. Line &amp; b. Area<br><span style="font-size:11px;font-weight:400;color:var(--color-text-subtlest)">with markers</span></div>
+    <div class="variant-name">a. Line &amp; b. Area</div>
     <div class="variant-legend">
       <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-blue)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-blue)"/></svg> Series A</span>
       <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-teal)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-teal)"/></svg> Series B</span>
@@ -223,7 +290,7 @@
       <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Bar Series</span>
       <span class="leg-sep"></span>
       <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-orange)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-orange)"/></svg> Line Series</span>
-      <span class="shape-tag">roundRect + line</span>
+      <span class="shape-tag">roundRect + line + marker</span>
     </div>
   </div>
   <div class="variant-row">
@@ -234,7 +301,7 @@
       <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Stack C</span>
       <span class="leg-sep"></span>
       <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-orange)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-orange)"/></svg> Line Series</span>
-      <span class="shape-tag">roundRect + line</span>
+      <span class="shape-tag">roundRect + line + marker</span>
     </div>
   </div>
 </div>
@@ -253,11 +320,21 @@
   </div>
   <div class="variant-row">
     <div class="variant-name">b. Pivot table</div>
-    <div class="variant-legend"><span class="no-legend">No legend — row/column headers serve as labels</span></div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Category A</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Category B</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Category C</span>
+      <span class="shape-tag">roundRect</span>
+    </div>
   </div>
   <div class="variant-row">
     <div class="variant-name">c. Summary table</div>
-    <div class="variant-legend"><span class="no-legend">No legend — aggregated rows are self-labeled</span></div>
+    <div class="variant-legend">
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Category A</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Category B</span>
+      <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Category C</span>
+      <span class="shape-tag">roundRect</span>
+    </div>
   </div>
 </div>
 
@@ -292,10 +369,10 @@
 <div class="widget-section">
   <div class="widget-header"><div class="wn">8</div><h2>Hierarchical Structure</h2></div>
   <div class="variant-row single"><div class="variant-legend">
-    <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Category A</span>
-    <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Category B</span>
-    <span class="leg-item"><div class="sw-circle" style="background:var(--c-green)"></div> Category C</span>
-    <span class="shape-tag">circle</span>
+    <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-blue)"></div> Category A</span>
+    <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-teal)"></div> Category B</span>
+    <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Category C</span>
+    <span class="shape-tag">roundRect</span>
   </div></div>
 </div>
 
@@ -312,7 +389,7 @@
 <div class="widget-section">
   <div class="widget-header"><div class="wn">10</div><h2>Map</h2></div>
   <div class="variant-row">
-    <div class="variant-name">a. Filled map<br><span style="font-size:11px;font-weight:400;color:var(--color-text-subtlest)">Monochrome</span></div>
+    <div class="variant-name">a. Filled map</div>
     <div class="variant-legend">
       <div style="display:flex;align-items:center;gap:8px">
         <span style="font-size:11px;color:var(--color-text-subtlest);font-weight:500;white-space:nowrap">0</span>
@@ -323,15 +400,14 @@
     </div>
   </div>
   <div class="variant-row">
-    <div class="variant-name">b. Filled map<br><span style="font-size:11px;font-weight:400;color:var(--color-text-subtlest)">Categorical</span></div>
+    <div class="variant-name">b. Bubble map</div>
     <div class="variant-legend">
-      <span class="leg-item"><div class="sw-circle" style="background:#0c66e4"></div> Category A</span>
-      <span class="leg-item"><div class="sw-circle" style="background:#2898bd"></div> Category B</span>
-      <span class="leg-item"><div class="sw-circle" style="background:#6a9a23"></div> Category C</span>
-      <span class="leg-item"><div class="sw-circle" style="background:#e97f33"></div> Category D</span>
-      <span class="leg-item"><div class="sw-circle" style="background:#af59e1"></div> Category E</span>
-      <span class="leg-item"><div class="sw-circle" style="background:#e2483d"></div> Category F</span>
-      <span class="shape-tag">circle</span>
+      <div class="size-group">
+        <div class="size-item"><div class="size-bubble" style="width:10px;height:10px"></div><span class="size-label">10</span></div>
+        <div class="size-item"><div class="size-bubble" style="width:18px;height:18px"></div><span class="size-label">50</span></div>
+        <div class="size-item"><div class="size-bubble" style="width:28px;height:28px"></div><span class="size-label">100</span></div>
+      </div>
+      <span class="shape-tag">size</span>
     </div>
   </div>
 </div>
@@ -350,15 +426,12 @@
   <div class="variant-row">
     <div class="variant-name">b. Bubble</div>
     <div class="variant-legend">
-      <span class="leg-item"><div class="sw-circle" style="background:var(--c-blue)"></div> Group A</span>
-      <span class="leg-item"><div class="sw-circle" style="background:var(--c-teal)"></div> Group B</span>
-      <span class="leg-sep"></span>
       <div class="size-group">
         <div class="size-item"><div class="size-bubble" style="width:10px;height:10px"></div><span class="size-label">10</span></div>
         <div class="size-item"><div class="size-bubble" style="width:18px;height:18px"></div><span class="size-label">50</span></div>
         <div class="size-item"><div class="size-bubble" style="width:28px;height:28px"></div><span class="size-label">100</span></div>
       </div>
-      <span class="shape-tag">circle + size</span>
+      <span class="shape-tag">size</span>
     </div>
   </div>
 </div>
@@ -386,7 +459,11 @@
 <div class="widget-section">
   <div class="widget-header"><div class="wn">14</div><h2>Heatmap</h2></div>
   <div class="variant-row single"><div class="variant-legend">
-    <div class="gradient-group"><div class="gradient-bar" style="background:linear-gradient(90deg,#e9f2ff,#85b8ff,#388bff,#0c66e4,#003590);width:160px"></div><div class="gradient-labels" style="width:160px"><span>0</span><span>50</span><span>100</span></div></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <span style="font-size:11px;color:var(--color-text-subtlest);font-weight:500;white-space:nowrap">0</span>
+      <div style="width:160px;height:10px;border-radius:5px;background:linear-gradient(90deg,#e0e3e8,#172b4d);flex-shrink:0"></div>
+      <span style="font-size:11px;color:var(--color-text-subtlest);font-weight:500;white-space:nowrap">100</span>
+    </div>
     <span class="shape-tag">gradient</span>
   </div></div>
 </div>
@@ -404,10 +481,10 @@
 <div class="widget-section">
   <div class="widget-header"><div class="wn">16</div><h2>Radar</h2></div>
   <div class="variant-row single"><div class="variant-legend">
-    <span class="leg-item"><div class="radar-swatch" style="background:var(--c-blue);border-color:var(--c-blue)"></div> Series A</span>
-    <span class="leg-item"><div class="radar-swatch" style="background:var(--c-teal);border-color:var(--c-teal)"></div> Series B</span>
-    <span class="leg-item"><div class="radar-swatch" style="background:var(--c-green);border-color:var(--c-green)"></div> Series C</span>
-    <span class="shape-tag">fill + stroke</span>
+    <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-blue)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-blue)"/></svg> Series A</span>
+    <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-teal)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-teal)"/></svg> Series B</span>
+    <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="var(--c-green)" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="var(--c-green)"/></svg> Series C</span>
+    <span class="shape-tag">line + marker</span>
   </div></div>
 </div>
 
@@ -429,97 +506,6 @@
     <span class="leg-item"><div class="sw-roundrect" style="background:var(--c-green)"></div> Category C</span>
     <span class="shape-tag">roundRect</span>
   </div></div>
-</div>
-
-<!-- SHAPES OVERVIEW -->
-<div class="section-title" style="margin-top:36px"><span class="badge">REF</span> Legend Shape Reference</div>
-<div class="shapes-overview">
-  <div class="shapes-overview-header"><div class="wn" style="background:#44546f">S</div><h2>All Shapes — Developer Reference</h2></div>
-  <div class="shapes-grid">
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">circle</div>
-      <div class="shape-cell-example">
-        <span class="leg-item"><div class="sw-circle" style="background:#0c66e4"></div> Label</span>
-      </div>
-      <div class="shape-cell-usage">Donut · Pie · Hierarchical · Network · Scatter · RAG · Bubble Map (color) · Map categorical</div>
-    </div>
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">roundRect</div>
-      <div class="shape-cell-example">
-        <span class="leg-item"><div class="sw-roundrect" style="background:#0c66e4"></div> Label</span>
-      </div>
-      <div class="shape-cell-usage">Bar · Combo · Table · Timeline · Treemap · Sankey · Card · List · Gauge · Progress Bar</div>
-    </div>
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">line</div>
-      <div class="shape-cell-example">
-        <span class="leg-item"><svg width="22" height="6"><line x1="0" y1="3" x2="22" y2="3" stroke="#0c66e4" stroke-width="2" stroke-linecap="round"/></svg> Label</span>
-      </div>
-      <div class="shape-cell-usage">Line · Area (no markers)</div>
-    </div>
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">line + marker</div>
-      <div class="shape-cell-example">
-        <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="#0c66e4" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="#0c66e4"/></svg> Label</span>
-      </div>
-      <div class="shape-cell-usage">Line · Area (with markers)</div>
-    </div>
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">roundRect + diamond</div>
-      <div class="shape-cell-example">
-        <span class="leg-item"><div class="sw-roundrect" style="background:#0c66e4"></div> Phase</span>
-        <span class="leg-item"><div class="tm-diamond" style="background:#af59e1"></div> Milestone</span>
-      </div>
-      <div class="shape-cell-usage">Timeline (phases + milestones)</div>
-    </div>
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">roundRect + line</div>
-      <div class="shape-cell-example">
-        <span class="leg-item"><div class="sw-roundrect" style="background:#0c66e4"></div> Bar</span>
-        <span class="leg-item"><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="#e97f33" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="6" r="3" fill="#e97f33"/></svg> Line</span>
-      </div>
-      <div class="shape-cell-usage">Combo chart</div>
-    </div>
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">gradient</div>
-      <div class="shape-cell-example">
-        <div style="display:flex;align-items:center;gap:6px">
-          <span style="font-size:10px;color:var(--color-text-subtlest)">0</span>
-          <div style="width:80px;height:10px;border-radius:5px;background:linear-gradient(90deg,#e0e3e8,#172b4d)"></div>
-          <span style="font-size:10px;color:var(--color-text-subtlest)">1K</span>
-        </div>
-      </div>
-      <div class="shape-cell-usage">Map (monochrome) · Heatmap</div>
-    </div>
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">fill + stroke</div>
-      <div class="shape-cell-example">
-        <span class="leg-item"><div class="radar-swatch" style="background:var(--c-blue);border-color:var(--c-blue)"></div> Label</span>
-      </div>
-      <div class="shape-cell-usage">Radar chart</div>
-    </div>
-
-    <div class="shape-cell">
-      <div class="shape-cell-name">size bubbles</div>
-      <div class="shape-cell-example">
-        <div class="size-group">
-          <div class="size-item"><div class="size-bubble" style="width:10px;height:10px"></div><span class="size-label">10</span></div>
-          <div class="size-item"><div class="size-bubble" style="width:18px;height:18px"></div><span class="size-label">50</span></div>
-          <div class="size-item"><div class="size-bubble" style="width:28px;height:28px"></div><span class="size-label">100</span></div>
-        </div>
-      </div>
-      <div class="shape-cell-usage">Bubble · Bubble Map (size dimension)</div>
-    </div>
-
-  </div>
 </div>
 
 </div><!-- /tab-defaults -->
